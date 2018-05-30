@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2017.9.11)  30 MAY 2018 22:41
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2017.9.11)  31 MAY 2018 00:51
 entering extended mode
 **sample-sigconf.tex
 (C:\Users\徐子恒\Desktop\project\数据通信作业latex模板\sample-sigcon
@@ -1626,8 +1626,6 @@ Requested font "SimSun/ICU" at 9.0pt
 Requested font "SimSun/ICU:script=latn;language=DFLT;mapping=tex-text;" at 9.0p
 t
  -> C:/WINDOWS/Fonts/simsun.ttc
-Requested font "[lmroman9-italic]:mapping=tex-text" at 9.0pt
- -> C:/CTEX/MiKTeX/fonts/opentype/public/lm/lmroman9-italic.otf
 Requested font "[lmroman8-regular]:mapping=tex-text" at 8.0pt
  -> C:/CTEX/MiKTeX/fonts/opentype/public/lm/lmroman8-regular.otf
 Requested font "[lmroman8-bold]:mapping=tex-text" at 8.0pt
@@ -1675,23 +1673,46 @@ Requested font "cmr8" at 8.0pt
  -> cmr8
 Requested font "cmr6" at 6.0pt
  -> cmr6
-File: ./figure/tasks.pdf Graphic file (type QTm)
-<use  "./figure/tasks.pdf" >
-Overfull \hbox (4.57005pt too wide) in paragraph at lines 116--117
+Requested font "cmmi9" at 9.0pt
+ -> cmmi9
+Requested font "cmsy9" at 9.0pt
+ -> cmsy9
+Requested font "cmex9" at 9.0pt
+ -> cmex9
+Requested font "msam10" at 9.0pt
+ -> msam10
+Requested font "msbm10" at 9.0pt
+ -> msbm10
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1.1
+
+]
+File: ./figure/figure1.png Graphic file (type QTm)
+
+<use  "./figure/figure1.png" >
+Overfull \hbox (4.57005pt too wide) in paragraph at lines 122--123
  [][] 
  []
 
+.................................................
+. fontspec info: "defining-font"
+. 
+. Font family 'SimSun(0)' created for font 'SimSun' with options
+. [Ligatures=TeX,BoldFont={SimHei},ItalicFont={[SIMKAI.TTF]}].
+. 
+. This font family consists of the following shapes:
+.................................................
+Requested font "SimHei/ICU:script=latn;language=DFLT;mapping=tex-text;" at 9.0p
+t
+ -> C:/WINDOWS/Fonts/simhei.ttf
 (C:\Users\徐子恒\Desktop\project\数据通信作业latex模板\sample-sigcon
 f.bbl
 
 Package natbib Warning: Empty `thebibliography' environment on input line 41.
 
-) [1.1
-
-]
-Overfull \vbox (10.0pt too high) has occurred while \output is active []
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 133.
+)
 Requested font "[lmsans9-regular]:mapping=tex-text" at 9.0pt
  -> C:/CTEX/MiKTeX/fonts/opentype/public/lm/lmsans9-regular.otf
 Requested font "SimHei" at 9.0pt
@@ -1706,29 +1727,30 @@ Requested font "SimHei/ICU" at 9.0pt
 . 
 . This font family consists of the following shapes:
 .................................................
-Requested font "SimHei/ICU:script=latn;language=DFLT;mapping=tex-text;" at 9.0p
-t
- -> C:/WINDOWS/Fonts/simhei.ttf
- [2.2
+ [2.2]
+Overfull \vbox (10.0pt too high) has occurred while \output is active []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 155.
+ [3.3
 
 
 ]
 Overfull \vbox (10.0pt too high) has occurred while \output is active []
 
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 133.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 155.
 
 (C:\Users\徐子恒\Desktop\project\数据通信作业latex模板\sample-sigcon
 f.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 133.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 133.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 155.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 155.
  ) 
 Here is how much of TeX's memory you used:
- 34365 strings out of 430478
- 629371 string characters out of 3191502
- 681325 words of memory out of 3000000
- 36806 multiletter control sequences out of 15000+200000
- 9066 words of font info for 76 fonts, out of 3000000 for 9000
+ 34395 strings out of 430478
+ 629810 string characters out of 3191502
+ 709324 words of memory out of 3000000
+ 36832 multiletter control sequences out of 15000+200000
+ 10304 words of font info for 80 fonts, out of 3000000 for 9000
  175 hyphenation exceptions out of 8191
- 60i,11n,94p,844b,568s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 60i,11n,94p,844b,686s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on sample-sigconf.pdf (2 pages).
+Output written on sample-sigconf.pdf (3 pages).
