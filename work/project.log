@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2017.9.11)  31 MAY 2018 21:33
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2017.9.11)  31 MAY 2018 21:40
 entering extended mode
 **project.tex
 (C:\Users\徐子恒\Desktop\project\work\project.tex
@@ -997,20 +997,20 @@ Overfull \hbox (5.71754pt too wide) in paragraph at lines 201--202
  []
 
 
-Overfull \hbox (4.68568pt too wide) in paragraph at lines 222--223
+Overfull \hbox (4.68568pt too wide) in paragraph at lines 218--219
 []\xeCJK@rm/m/n/9 其 中 $\OML/cmm/m/it/9 net[]goodput$ \xeCJK@rm/m/n/9 是 �
 � 用 指 数 加 权 移 动 平 均 线 |（\EU1/lmr/m/n/9 EWMA\xeCJK@rm/m/n/
 9 ）|
  []
 
 [4]
-Overfull \hbox (14.23679pt too wide) in paragraph at lines 234--235
+Overfull \hbox (14.23679pt too wide) in paragraph at lines 230--231
 \OML/cmm/m/it/9 paint[]rate$ \xeCJK@rm/m/n/9 参 数 的 范 围 从 最 小 �
 � 画 率 到 最 大 绘 画 率。| $\OML/cmm/m/it/9 paint[]rate$
  []
 
 
-LaTeX Warning: Citation `39' on page \thepage  undefined on input line 236.
+LaTeX Warning: Citation `39' on page \thepage  undefined on input line 232.
 
 [5]
 Requested font "[lmromancaps10-regular]:mapping=tex-text" at 9.0pt

@@ -183,7 +183,7 @@ Wikipedia网页有两个链接到页面的Javascript文件 - application.js和jq
 	\caption{不同图片格式的能耗}\label{fig:tasks}
 \end{figure}
 
-如图4\cite{13}所示，不同的图片格式有很大的能耗差距，所以如果在加载网页时把图片进行格式转化可以有效地减少加载网页时的渲染消耗
+如图4\cite{13}所示，不同的图片格式有很大的能耗差距，所以如果在加载网页时把图片进行格式转化可以有效地减少加载网页时的渲染消耗。
 
 \subsection{Offloading Browser Computation}
 
@@ -191,20 +191,16 @@ Wikipedia网页有两个链接到页面的Javascript文件 - application.js和jq
 
 一般实现方法有两种：
 
-1.	前端代理：web代理检查所有到达手机的流量，并部分呈现该页面。此时，代理决定在将内容发送到手机之前应该如何修改内容。这种方法以前由旧的WAP网关使用，因为他们把HTML翻译成WAP。Opera和SkyFire也是使用这种办法。
+1.	前端代理：web代理检查所有到达手机的流量，并部分呈现该页面。此时，代理决定在将内容发送到手机之前应该如何修改内容。这种方法以前由旧的WAP网关使用，因为他们把HTML翻译成WAP。Opera和SkyFire也是使用这种办法。图5\cite{13}展现了这种方法的好处
 
 2.	后端服务器：手机按原样下载网络内容，但随后将某些操作卸载到服务器场。 此时
-手机会决定需要卸载的内容。
+手机会决定需要卸载的内容。但就目前的技术水平而言，这是个很难实现的技术。
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=3.4in]{./figure5}
 	\caption{前端代理的好处}\label{fig:tasks}
 \end{figure}
-
-图5\cite{13}展现了前端代理的好处
-
-但是图像渲染的后端卸载在当今技术下暂时是不可行的一种技术
 
 \subsection{Network-AwareWeb Resource Processing}
 
