@@ -1,5 +1,10 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: sample-sigconf.aux
 The style file: ACM-Reference-Format.bst
-I found no \citation commands---while reading file sample-sigconf.aux
 Database file #1: sigproc.bib
-(There was 1 error message)
+Warning--I didn't find a database entry for "3"
+Warning--I didn't find a database entry for "2"
+Warning--I didn't find a database entry for "14"
+Warning--I didn't find a database entry for "4"
+Warning--I didn't find a database entry for "6"
+Warning--I didn't find a database entry for "19"
+(There were 6 warnings)
