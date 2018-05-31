@@ -90,7 +90,7 @@
 
 \subsection{Energy-efficient mobile web browsing}
 
-Thiagarajan等人\cite{13}研究了呈现单个网页原语（如HTML，图像，JavaScript和Cascade Style Sheets（CSS））所消耗的能量，并提出了设计高能效网页的指导方针。如减少复杂的JavaScript和CSS以及使用JPEG图像。Zhu等人\cite{14}根据统计推断模型，通过网页基元，HTML和CSS的特征估计页面加载时间和能量消耗，介绍了用于在异构核心上进行移动浏览的网页的高能效，延迟敏感性调度。 Butkiewicz等人\cite{15}提出了一个线性回归模型，该模型根据网页的特征（例如图像的数量和大小）和网络服务器（例如服务器/原点的数量）预测页面加载时间。 Chameleon \cite{16}\cite{17}在用户提供的约束条件下，在OLED移动系统上呈现具有高能效色彩方案的网页。 Qian等人\cite{18}深入分析了移动网页浏览如何使用无线网络资源，并提出了节能浏览指南，例如将高网页分解为几个较小的子页面，并减少蜂窝网络中由JavaScript触发的延迟或定期数据传输。Zhao等人\cite{19}重新组织Web浏览器中的计算阶段和预测的用户阅读时间，以便快速将无线接口置于基于3G的电话的省电IDLE状态
+Zhu等人\cite{14}根据统计推断模型，通过网页基元，HTML和CSS的特征估计页面加载时间和能量消耗，介绍了用于在异构核心上进行移动浏览的网页的高能效，延迟敏感性调度。 Butkiewicz等人\cite{15}提出了一个线性回归模型，该模型根据网页的特征（例如图像的数量和大小）和网络服务器（例如服务器/原点的数量）预测页面加载时间。 Chameleon \cite{16}\cite{17}在用户提供的约束条件下，在OLED移动系统上呈现具有高能效色彩方案的网页。 Qian等人\cite{18}深入分析了移动网页浏览如何使用无线网络资源，并提出了节能浏览指南，例如将高网页分解为几个较小的子页面，并减少蜂窝网络中由JavaScript触发的延迟或定期数据传输。Zhao等人\cite{19}重新组织Web浏览器中的计算阶段和预测的用户阅读时间，以便快速将无线接口置于基于3G的电话的省电IDLE状态
 
 \subsection{Mobile browsing performance optimization}
 
@@ -122,7 +122,13 @@ Chromium中的每个进程都有多个线程,。进程和线程被设计为异�
 
 \subsection{Energy Cost Of Page Loading}
 
-Web资源处理是浏览的主要组件之一，同时还有资源下载和内容渲染。 Web资源处理通常包括HTML和CSS解析，图像解码，Javascript执行以及更新DOM树和图形层。在Chromium中，只要呈现器进程通知了浏览器进程中可用的数据，就会执行上述处理。如图1所示，这两个进程使用共享资源缓冲区交换数据。浏览器进程在套接字处理程序上使用read系统调用来从网络接收网页资源。每个读取系统调用都会将接收到的数据直接写入资源缓冲区，默认情况下最大数据大小为32 KB。在每次读取系统调用时，无论接收到多少数据，浏览器进程都会立即通知呈现器进程开始处理接收到的数据。
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.4in]{./figure6}
+	\caption{加载网页的总能耗}\label{fig:tasks}
+\end{figure}
+
+Web资源处理是浏览的主要组件之一，同时还有资源下载和内容渲染。由图6\cite{13}可知，Web资源处理通常包括HTML和CSS解析，图像解码，Javascript执行以及更新DOM树和图形层。在Chromium中，只要呈现器进程通知了浏览器进程中可用的数据，就会执行上述处理。如图1所示，这两个进程使用共享资源缓冲区交换数据。浏览器进程在套接字处理程序上使用read系统调用来从网络接收网页资源。每个读取系统调用都会将接收到的数据直接写入资源缓冲区，默认情况下最大数据大小为32 KB。在每次读取系统调用时，无论接收到多少数据，浏览器进程都会立即通知呈现器进程开始处理接收到的数据。
 
 尽管立即处理接收到的数据是很自然的，并且可以最大限度地减少页面加载时间，但这不是节能的。原因在于许多读取系统调用会返回少量数据，从而导致Browser进程和Renderer进程之间的大量IPC。平均而言，每个网页的IPC总数为871（每秒176）。每个IPC都有一个固定的开销。此外，网络资源处理中还有其他开销。每次处理数据块时，即使数据块很小，Renderer进程也必须经历整个数据渲染管道。特别是对于图像数据，Compositor，Raster Worker和Async Transfer线程中涉及许多图形活动。因此，累积的管理费用会浪费大量能源。
 
@@ -137,6 +143,68 @@ Web资源处理是浏览的主要组件之一，同时还有资源下载和内�
 \section{OVERVIEW}
 
 在本节中，我们将介绍旨在更好地平衡移动网页加载中的能源成本和性能的几种技术。
+
+\subsection{Reducing Javascript Power Consumption}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.4in]{./figure2}
+	\caption{Javascript的能耗}\label{fig:tasks}
+\end{figure}
+
+
+如图2所示\cite{13}，Javascript是网页中最耗能的组件之一。很多网页加载了大量的JavaScript文件来渲染网页，然而并非所有的脚本都被页面使用，这造成了巨大的能源浪费。
+
+Wikipedia网页有两个链接到页面的Javascript文件 - application.js和jquery.js。 application.js是特定于维基百科网站的Javascript，jquery.js是通用的jQuery Javascript库。在维基百科页面的每个部分，如简介，目录等，可以通过点击每个部分上方的按钮来折叠和展开。 jquery.js中的Javascript主要用于单个用途，以根据单击的按钮的ID动态识别正确的部分。但是单独加载这个Javascript到内存需要4焦耳。
+
+为了证明这种能量是可以避免的，我们用不同的Javascript重新设计了页面。这一次，每个文本部分和按钮被赋予相同的id，并且Javascript函数使用$document.getElementById()$来获得正确的部分，并且使用$element.value = show/hide$。 application.js现在被这个简单的Javascript取代。我们发现在缓存模式下，修改过的维基百科页面呈现为9.5焦耳。只需将application.js和jquery.js文件作为链接添加到页面，就可以将能耗降至15焦耳。
+
+该实验显示，在移动页面上缩小Javascript以仅包含页面使用的功能，这大大减少了能源使用。使用通用的Javascript库可以简化网页发展，但增加了由此产生的页面使用的能量
+
+\subsection{Reducing CSS Power Consumption}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.4in]{./figure3}
+	\caption{CCS的能耗}\label{fig:tasks}
+\end{figure}
+
+与之前的实验类似，我们发现具有未使用的CSS规则的大型CSS文件消耗的能量多于最低要求的能量。 例如，Apple消耗大量精力下载和呈现CSS（图3\cite{13}）。 下载和渲染此页面的CSS的总能量约为12焦耳。这是因为Apple主页需要5个不同的CSS文件，其中包含页面中使用的不同规则。
+
+我们通过用仅包含页面所需规则的一个CSS文件替换多个CSS文件来修改Apple站点。 这导致了5焦耳的能量下降。 这约占苹果公司CSS总能耗的40％。 这种能量可以通过仅使用CSS规则的CSS文件来保存。
+
+这表明像Javascript一样，CSS文件应该是页面特定的，并且只包含页面中元素所需的规则。
+
+\subsection{Image Formats: Comparison and Optimization}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.4in]{./figure4}
+	\caption{不同图片格式的能耗}\label{fig:tasks}
+\end{figure}
+
+如图4\cite{13}所示，不同的图片格式有很大的能耗差距，所以如果在加载网页时把图片进行格式转化可以有效地减少加载网页时的渲染消耗
+
+\subsection{Offloading Browser Computation}
+
+由于手机能量有限，我们可以考虑减少其工作强度，因此，依托于云计算技术，我们可以假设将所有的计算转移到云服务器中，只让手机显示结果。在网页浏览的环境中，我们可以将图像渲染（包括压缩和转换为bitmap（位图））转移到云端，最终手机只显示处理好的位图。已知的浏览器中Opera和SkyFire采用了这种方法。他们的手机浏览器通过一个代理来与网络交流，这个代理完成了大部分渲染页面的工作。
+
+一般实现方法有两种：
+
+1.	前端代理：web代理检查所有到达手机的流量，并部分呈现该页面。此时，代理决定在将内容发送到手机之前应该如何修改内容。这种方法以前由旧的WAP网关使用，因为他们把HTML翻译成WAP。Opera和SkyFire也是使用这种办法。
+
+2.	后端服务器：手机按原样下载网络内容，但随后将某些操作卸载到服务器场。 此时
+手机会决定需要卸载的内容。
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=3.4in]{./figure5}
+	\caption{前端代理的好处}\label{fig:tasks}
+\end{figure}
+
+图5\cite{13}展现了前端代理的好处
+
+但是图像渲染的后端卸载在当今技术下暂时是不可行的一种技术
 
 \subsection{Network-AwareWeb Resource Processing}
 
@@ -186,10 +254,9 @@ ACP调整$paint\_rate$限制，而AAS仅监视实际帧速率（帧绘制时间�
 
 AAS中的小内核和大内核之间的线程迁移对于所有应用程序都是通用的。 AAS技术动态地改变了QoS相关线程的亲和性，因此不需要将特定线程硬分配给核心。但是，应由AAS管理哪些线程以及如何定义QoS是特定于应用程序的。在第5节中，我们将向我们展示Chromium的哪些线程应用AAS技术。
 
-
 \section{conclusion}
 
-本文提出了多种有效的技术来优化智能手机网页加载的能耗。 其中两项技术，网络感知资源处理和自适应内容绘制，旨在解决当前移动Web浏览器在其内容处理和图形处理管道中的能源效率问题。 第三种是应用辅助调度，旨在平衡节能和QoS big.LITTLE平台之间的权衡。 这些技术被实施在了Chromium和Firefox中，并使用真实世界的网站和最新一代的智能手机进行了全面评估。 实验结果和用户研究表明，这些技术能够显着降低网页加载的能源成本，并引入难以察觉的页面加载时间增加。
+本文提出了多种有效的技术来优化智能手机网页加载的能耗。包括减少复杂的JavaScript和CSS以及使用JPEG图像，讲计算转移到云端，网络感知资源处理，自适应内容绘制和应用辅助调度。经过实验测试，这些技术能够显着降低网页加载的能源成本。虽然它们会略微增加页面的加载时间，但大部分用户不会察觉到这种增加。
 
 \bibliographystyle{abbrv}
 \begin{thebibliography}{1}
@@ -239,7 +306,7 @@ AAS中的小内核和大内核之间的线程迁移对于所有应用程序都�
 	\newblock \bibemphic{HotPower, 2014.}
 	
 	\bibitem[13]{13}
-	\newblock N. Thiagarajan, G. Aggarwal, A. Nicoara, D. Boneh, and J. P. Singh. Who Killed My Battery: Analyzing Mobile Browser Energy Consumption.
+	\newblock N. Thiagarajan, G. Aggarwal, A. Nicoara, D. Boneh, and J. P. Singh. Who Killed My Battery?: Analyzing Mobile Browser Energy Consumption.
 	\newblock \bibemphic{Proc. WWW, 2012.}
 	
 	\bibitem[14]{14}
